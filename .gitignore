@@ -60,6 +60,9 @@ crashlytics-build.properties
 .vscode/*
 VSCode.cs
 VSCode.cs.meta
-Assets/Pluguins/
+#音声をアップロードしないように
 Assets/Sound/
+#フォントをアップロードしないように
 Assets/Font/
+#プラグインをアップロードしないように
+Assets/Plugins/
