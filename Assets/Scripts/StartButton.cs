@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 
 public class StartButton : MonoBehaviour
@@ -16,5 +17,13 @@ public class StartButton : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnClick(){
+        StartCoroutine("LoadScene");
+    }
+    IEnumerator LoadScene(){
+        Debug.Log("ロード中");
+        yield return SceneManager.LoadSceneAsync(1);
     }
 }
