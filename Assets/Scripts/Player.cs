@@ -14,10 +14,19 @@ public class Player : MonoBehaviour
     [SerializeField] float speed;
     */
 
+    [SerializeField] GameObject ShotObject;//発射するオブジェクト
+    [SerializeField] float span;//弾がたまるまでの間隔
+    [SerializeField] float delta;//溜めている時間
+
+    [SerializeField] Vector3 MoveVelocity;//進むべき方向
+
+    public float speed;//速度
+
     void Start()
     {
         //this.rigid2d = GetComponent<Rigidbody2D>();
         Debug.Log("nyaa");
+        delta = 0;
     }
 
     // Update is called once per frame
@@ -32,17 +41,43 @@ public class Player : MonoBehaviour
             key = -1;
         }
         */
+        MoveVelocity = new Vector3(0.0f,0.0f,0.0f);
 
-        if(Input.GetKey(KeyCode.RightArrow)){
-            transform.Translate(1,0,0);
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            //transform.Translate(1, 0, 0);
+            MoveVelocity = new Vector3(speed,0.0f,0.0f);
         }
-        if(Input.GetKey(KeyCode.LeftArrow)){
-            transform.Translate(-1,0,0);
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            //transform.Translate(-1, 0, 0);
+            MoveVelocity = new Vector3(speed*-1,0.0f,0.0f);
         }
 
         /*speed = Mathf.Abs(this.rigid2d.velocity.x);
         if(speed < this.maxWalkSpeed){
             this.rigid2d.AddForce(transform.right*key*this.walkForce);
         }*/
+        delta += Time.deltaTime;
+
+        if(Input.GetKey(KeyCode.Z)){
+            if(span < delta){
+                delta =0;
+                Attack();
+            }
+        }
+
+        Move();
+    }
+
+    void Move(){
+        gameObject.transform.position += MoveVelocity*Time.deltaTime;
+    }
+
+    void Attack()
+    {
+        GameObject FireObj = Instantiate(ShotObject) as GameObject;//弾の生成
+        FireObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y+0.5f, this.transform.position.z);//自分の場所に出す
+        Debug.Log("oaaa");
     }
 }
