@@ -20,6 +20,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] Vector3 MoveVelocity;//進むべき方向
 
+    [SerializeField] GameObject IceWall;//子オブジェクトの壁
+    [SerializeField] bool IsFire;//trueなら炎のモード、falseなら氷のモード
+
     public float speed;//速度
 
     void Start()
@@ -27,6 +30,8 @@ public class Player : MonoBehaviour
         //this.rigid2d = GetComponent<Rigidbody2D>();
         Debug.Log("nyaa");
         delta = 0;
+        IsFire = true;
+        IceWall = this.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -41,17 +46,27 @@ public class Player : MonoBehaviour
             key = -1;
         }
         */
-        MoveVelocity = new Vector3(0.0f,0.0f,0.0f);
+        //IceWall.gameObject.SetActive(!IsFire);//でもいいけど分かりづらい
+        if (IsFire)
+        {
+            IceWall.gameObject.SetActive(false);
+        }
+        else
+        {
+            IceWall.gameObject.SetActive(true);
+        }
+
+        MoveVelocity = new Vector3(0.0f, 0.0f, 0.0f);
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
             //transform.Translate(1, 0, 0);
-            MoveVelocity = new Vector3(speed,0.0f,0.0f);
+            MoveVelocity = new Vector3(speed, 0.0f, 0.0f);
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             //transform.Translate(-1, 0, 0);
-            MoveVelocity = new Vector3(speed*-1,0.0f,0.0f);
+            MoveVelocity = new Vector3(speed * -1, 0.0f, 0.0f);
         }
 
         /*speed = Mathf.Abs(this.rigid2d.velocity.x);
@@ -60,9 +75,15 @@ public class Player : MonoBehaviour
         }*/
         delta += Time.deltaTime;
 
-        if(Input.GetKey(KeyCode.Z)){
-            if(span < delta){
-                delta =0;
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            IsFire = !IsFire;//反転
+        }
+        if (IsFire)
+        {
+            if (span < delta)
+            {
+                delta = 0;
                 Attack();
             }
         }
@@ -70,14 +91,15 @@ public class Player : MonoBehaviour
         Move();
     }
 
-    void Move(){
-        gameObject.transform.position += MoveVelocity*Time.deltaTime;
+    void Move()
+    {
+        gameObject.transform.position += MoveVelocity * Time.deltaTime;
     }
 
     void Attack()
     {
         GameObject FireObj = Instantiate(ShotObject) as GameObject;//弾の生成
-        FireObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y+0.5f, this.transform.position.z);//自分の場所に出す
+        FireObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);//自分の場所に出す
         Debug.Log("oaaa");
     }
 }
