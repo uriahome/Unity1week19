@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3413980614801493685}
   - component: {fileID: 3413980614801493684}
   - component: {fileID: 3413980614801493682}
-  m_Layer: 0
+  - component: {fileID: 8344931738076963132}
+  m_Layer: 10
   m_Name: fire
-  m_TagString: Untagged
+  m_TagString: Fire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,3 +97,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   MoveVelocity: {x: 0, y: 0, z: 0}
+--- !u!61 &8344931738076963132
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3413980614801493687}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.020826817, y: 0.034711838}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.6, y: 1.6}
+    newSize: {x: 2.56, y: 2.56}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8363433, y: 1.3639607}
+  m_EdgeRadius: 0

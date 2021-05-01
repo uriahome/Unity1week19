@@ -37,6 +37,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //簡易移動制御
+        if(this.transform.position.x >= 7.0f){
+            this.gameObject.transform.position = new Vector3(7.0f,this.transform.position.y,0.0f);
+        }
+        if(this.transform.position.x <= -7.0f){
+            this.gameObject.transform.position = new Vector3(-7.0f,this.transform.position.y,0.0f);
+        }
         /*key = 0;
 
         if(Input.GetKey(KeyCode.RightArrow)){
@@ -100,6 +107,6 @@ public class Player : MonoBehaviour
     {
         GameObject FireObj = Instantiate(ShotObject) as GameObject;//弾の生成
         FireObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);//自分の場所に出す
-        Debug.Log("oaaa");
+        //Debug.Log("oaaa");
     }
 }
