@@ -14,8 +14,13 @@ public class Stone : MonoBehaviour
 
     [SerializeField] float speed;
     [SerializeField] bool IsFire;//炎の隕石かどうか
+
+    [SerializeField] GameObject ScoreText;
+    [SerializeField] Score ScoreM;
     void Start()
     {
+        ScoreText = GameObject.Find("Canvas/ScoreText");
+        ScoreM = ScoreText.GetComponent<Score>();
         rb2d = this.GetComponent<Rigidbody2D>();
         Move();
     }
@@ -48,10 +53,12 @@ public class Stone : MonoBehaviour
         {
             if (collision.gameObject.tag == "Fire")
             {
+                ScoreM.ChangeScore(100);
                 Destroy(this.gameObject);
             }
             else if (collision.gameObject.tag == "FireBall")
             {
+                ScoreM.ChangeScore(100);
                 Destroy(this.gameObject);
             }
         }
@@ -63,6 +70,7 @@ public class Stone : MonoBehaviour
             Move();
         }else if(collision.gameObject.tag =="Earth"){
             Debug.Log("Earth Hit!!");
+            ScoreM.ChangeScore(-100);
             Destroy(this.gameObject);
         }
     }
