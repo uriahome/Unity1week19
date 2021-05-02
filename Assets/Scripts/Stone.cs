@@ -70,7 +70,7 @@ public class Stone : MonoBehaviour
             Move();
         }else if(collision.gameObject.tag =="Earth"){
             Debug.Log("Earth Hit!!");
-            ScoreM.ChangeScore(-100);
+            ScoreM.ChangeScore(-50);
             Destroy(this.gameObject);
         }
     }
