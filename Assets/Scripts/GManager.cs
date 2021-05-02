@@ -13,35 +13,61 @@ public class GManager : MonoBehaviour
     public float CountTime;//経過時間
     public int seconds;//制限時間
 
+    [SerializeField] GameObject ScoreText;
+    [SerializeField] Score ScoreM;
+
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         Timer = GameObject.Find("Canvas/TimeText");
         TimerText = Timer.GetComponent<Text>();
-        IsBattle = true;
+        ScoreText = GameObject.Find("Canvas/ScoreText");
+        ScoreM = ScoreText.GetComponent<Score>();
+        //IsBattle = true;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (seconds >=0)
+        if (!IsBattle)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                GameStart();
+            }
+        }
+
+        if (seconds >= 0)
         {
             CountTime -= Time.deltaTime;
-        }else if(seconds <0)
+        }
+        else if (seconds < 0)
         {
             CountTime = -1;
-            if(IsBattle){
-                IsBattle = false;
+            if (IsBattle)
+            {
+                //IsBattle = false;
                 Finish();
             }
         }
         seconds = (int)CountTime;
-        TimerText.text = "Time:"+seconds.ToString();
+        TimerText.text = "Time:" + seconds.ToString();
     }
 
-    void Finish(){
+    void GameStart()
+    {
+        IsBattle = true;
+        CountTime = 30;
+        seconds = (int)CountTime;
+        TimerText.text = "Time:" + seconds.ToString();
+        ScoreM.ScoreRefresh();
+    }
+
+    void Finish()
+    {
+        IsBattle = false;
         Debug.Log("終了");
     }
 }

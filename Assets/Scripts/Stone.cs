@@ -7,7 +7,7 @@ public class Stone : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] Rigidbody2D rb2d;
 
-    [SerializeField] float directionX;
+    public float directionX;
     [SerializeField] float directionY;
 
     [SerializeField] Vector2 direction;//= new Vector2(1, 1).normalized;
@@ -28,7 +28,9 @@ public class Stone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(!GManager.instance.IsBattle){
+            Destroy(this.gameObject);
+        }
     }
     void Move()
     {
