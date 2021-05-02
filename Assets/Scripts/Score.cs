@@ -8,6 +8,8 @@ public class Score : MonoBehaviour
 {
     public int ScorePoint;//点数
     Text TargetText;
+    public AudioSource audio;
+    public AudioClip sound;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,8 @@ public class Score : MonoBehaviour
                 //トゥイーンの時間(秒)
                 1.0f
             );//通常版の文法を使用することで文章内の一部をトゥイーンさせることが可能
+
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -51,6 +55,7 @@ public class Score : MonoBehaviour
         {
             return;//戦闘中以外は計算しない
         }
+        audio.PlayOneShot(sound);//効果音を再生
         int StartScore = ScorePoint;
         ScorePoint += AddPoint;
         if (ScorePoint <= 0)
