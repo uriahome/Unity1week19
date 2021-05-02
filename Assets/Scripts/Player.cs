@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!GManager.instance.IsBattle){
+            return;
+        }
         //簡易移動制御
         if(this.transform.position.x >= 7.0f){
             this.gameObject.transform.position = new Vector3(7.0f,this.transform.position.y,0.0f);
