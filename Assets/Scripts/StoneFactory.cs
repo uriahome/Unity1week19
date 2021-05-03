@@ -11,11 +11,14 @@ public class StoneFactory : MonoBehaviour
     [SerializeField] float delta;//溜めている時間
 
     [SerializeField] int[] Direction = { 0, 30, 45, 60, 90, 105, 120, 150, 180 };
+    [SerializeField] int[] Speeds = {2,3,5,8};
     //[SerialilzeField] Stone StoneScript;
     void Start()
     {
         delta = 0;
         Move();
+        Debug.Log(Speeds.Length);
+        Debug.Log(Direction.Length);
     }
 
     // Update is called once per frame
@@ -43,10 +46,15 @@ public class StoneFactory : MonoBehaviour
         StoneObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);//自分の場所に出す
         Stone StoneScript = StoneObj.GetComponent<Stone>();
         int DirectionNum;
-        int r;
+        int r;//乱数
         r = Random.Range(0, 100);
-        DirectionNum = r % 9;
+        DirectionNum = r % Direction.Length;
         StoneScript.directionX = Direction[DirectionNum];
+        int s ;//乱数
+        int SpeedNum;
+        s = Random.Range(0,100);
+        SpeedNum = s%Speeds.Length;
+        StoneScript.speed = Speeds[SpeedNum];
 
     }
 

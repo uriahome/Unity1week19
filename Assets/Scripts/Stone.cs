@@ -12,7 +12,7 @@ public class Stone : MonoBehaviour
 
     [SerializeField] Vector2 direction;//= new Vector2(1, 1).normalized;
 
-    [SerializeField] float speed;
+    public float speed;
     [SerializeField] bool IsFire;//炎の隕石かどうか
 
     [SerializeField] GameObject ScoreText;
