@@ -40,7 +40,7 @@ public class StoneFactory : MonoBehaviour
     {
         int SummonNum;
         SummonNum = Random.Range(0, 100);
-        SummonNum %= 3;
+        SummonNum %= ShotObject.Length;
 
         GameObject StoneObj = Instantiate(ShotObject[SummonNum]) as GameObject;//弾の生成
         StoneObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);//自分の場所に出す

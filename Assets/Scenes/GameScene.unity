@@ -3901,6 +3901,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: StoneFactory
       objectReference: {fileID: 0}
+    - target: {fileID: 7788870914512500418, guid: 99ac5208cc5fc514da9ddec9a66c6435,
+        type: 3}
+      propertyPath: ShotObject.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7788870914512500418, guid: 99ac5208cc5fc514da9ddec9a66c6435,
+        type: 3}
+      propertyPath: ShotObject.Array.data[3]
+      value: 
+      objectReference: {fileID: 7104355729445945731, guid: 69db94084dc8bd349b463e498e05f821,
+        type: 3}
     - target: {fileID: 7788870914512500419, guid: 99ac5208cc5fc514da9ddec9a66c6435,
         type: 3}
       propertyPath: m_RootOrder
