@@ -17,6 +17,8 @@ public class GManager : MonoBehaviour
     [SerializeField] Score ScoreM;
 
     [SerializeField] GameObject StartText;
+    [SerializeField] GameObject PlayerObj;
+    [SerializeField] Player PlayerM;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,8 @@ public class GManager : MonoBehaviour
         ScoreText = GameObject.Find("Canvas/ScoreText");
         StartText = GameObject.Find("Canvas/StartText");
         ScoreM = ScoreText.GetComponent<Score>();
+        PlayerObj = GameObject.Find("Player");
+        PlayerM = PlayerObj.GetComponent<Player>();
         //IsBattle = true;
 
     }
@@ -67,6 +71,7 @@ public class GManager : MonoBehaviour
         TimerText.text = "Time:" + seconds.ToString();
         ScoreM.ScoreRefresh();
         StartText.gameObject.SetActive(false);
+        PlayerM.Restart();
     }
 
     void Finish()

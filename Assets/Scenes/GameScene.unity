@@ -3583,6 +3583,8 @@ MonoBehaviour:
   ScoreText: {fileID: 0}
   ScoreM: {fileID: 0}
   StartText: {fileID: 0}
+  PlayerObj: {fileID: 0}
+  PlayerM: {fileID: 0}
 --- !u!4 &2098164177
 Transform:
   m_ObjectHideFlags: 0
@@ -3812,6 +3814,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3443869639226820985, guid: 2c2926688c2e06c4a9dc44ea57625a14,
+        type: 3}
+      propertyPath: BoostSpan
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c2926688c2e06c4a9dc44ea57625a14, type: 3}
