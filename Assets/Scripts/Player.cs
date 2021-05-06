@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
             if (span < delta)
             {
                 delta = 0;
-                Attack();
+                DoubleAttack();
             }
         }
 
@@ -153,6 +153,16 @@ public class Player : MonoBehaviour
         GameObject FireObj = Instantiate(ShotObject) as GameObject;//弾の生成
         FireObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);//自分の場所に出す
         //Debug.Log("oaaa");
+    }
+
+    void DoubleAttack(){
+        GameObject FireObj_Left = Instantiate(ShotObject) as GameObject;//弾の生成(左側)
+        FireObj_Left.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);//自分の場所に出す
+        FireObj_Left.gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,25.0f);//角度調整
+
+        GameObject FireObj_Right = Instantiate(ShotObject) as GameObject;//弾の生成(右側)
+        FireObj_Right.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);//自分の場所に出す
+        FireObj_Right.gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,-25.0f);//角度調整
     }
 
     public void Restart()

@@ -9,7 +9,7 @@ public class Shot : MonoBehaviour
     public Vector3 MoveVelocity;//進むべき方向
     void Start()
     {
-        this.gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
+        //this.gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,0.0f);
         MoveVelocity = gameObject.transform.rotation * new Vector3(0.0f,speed,0.0f);
     }
 
