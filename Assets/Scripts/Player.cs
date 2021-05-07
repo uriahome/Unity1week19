@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
     [SerializeField] float BoostSpan;
     [SerializeField] float BoostDelta;
 
+    [SerializeField] int[] Direction = { 0, 25, -25 };//弾の発射角度
+
+    [SerializeField] int AttackPattern;
+
     public float speed;//速度
 
     void Start()
@@ -39,6 +43,7 @@ public class Player : MonoBehaviour
         IceWall = this.transform.GetChild(0).gameObject;
         IsBoost = false;
         BoostCount = 0;
+        AttackPattern = 1;
     }
 
     // Update is called once per frame
@@ -78,16 +83,20 @@ public class Player : MonoBehaviour
 
 
         MoveVelocity = new Vector3(0.0f, 0.0f, 0.0f);
-        if(!IsBoost && BoostCount <3){
-            if(Input.GetKeyDown(KeyCode.Space)){
+        if (!IsBoost && BoostCount < 3)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
                 IsBoost = true;
                 BoostCount++;
                 BoostDelta = 0;
             }
         }
-        if(IsBoost){
+        if (IsBoost)
+        {
             BoostDelta += Time.deltaTime;
-            if(BoostSpan <BoostDelta){
+            if (BoostSpan < BoostDelta)
+            {
                 IsBoost = false;
                 BoostDelta = 0;
             }
@@ -136,7 +145,8 @@ public class Player : MonoBehaviour
             if (span < delta)
             {
                 delta = 0;
-                DoubleAttack();
+                //DoubleAttack();
+                Attack();
             }
         }
 
@@ -150,24 +160,30 @@ public class Player : MonoBehaviour
 
     void Attack()
     {
-        GameObject FireObj = Instantiate(ShotObject) as GameObject;//弾の生成
-        FireObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);//自分の場所に出す
+        for (int i = 0; i < AttackPattern; i++)
+        {
+            GameObject FireObj = Instantiate(ShotObject) as GameObject;//弾の生成
+            FireObj.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);//自分の場所に出す
+            FireObj.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, Direction[i]);
+        }
         //Debug.Log("oaaa");
     }
 
-    void DoubleAttack(){
+    void DoubleAttack()
+    {
         GameObject FireObj_Left = Instantiate(ShotObject) as GameObject;//弾の生成(左側)
         FireObj_Left.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);//自分の場所に出す
-        FireObj_Left.gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,25.0f);//角度調整
+        FireObj_Left.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 25.0f);//角度調整
 
         GameObject FireObj_Right = Instantiate(ShotObject) as GameObject;//弾の生成(右側)
         FireObj_Right.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 0.5f, this.transform.position.z);//自分の場所に出す
-        FireObj_Right.gameObject.transform.rotation = Quaternion.Euler(0.0f,0.0f,-25.0f);//角度調整
+        FireObj_Right.gameObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, -25.0f);//角度調整
     }
 
     public void Restart()
     {
         IsBoost = false;
         BoostCount = 0;
+        AttackPattern = 1;
     }
 }
