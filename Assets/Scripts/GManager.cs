@@ -12,6 +12,7 @@ public class GManager : MonoBehaviour
     public Text TimerText;
     public float CountTime;//経過時間
     public int seconds;//制限時間
+    public bool CheckTime;//切り替えのチェック
 
     [SerializeField] GameObject ScoreText;
     [SerializeField] Score ScoreM;
@@ -49,6 +50,13 @@ public class GManager : MonoBehaviour
         if (seconds >= 0)
         {
             CountTime -= Time.deltaTime;
+             if(CountTime  <= 15.0f){
+                if(!CheckTime){
+                    CheckTime = true;
+                    PlayerM.ChangeAttack();
+                    //制限時間が短くなると攻撃パターンが変化
+                }
+            }
         }
         else if (seconds < 0)
         {
@@ -72,6 +80,7 @@ public class GManager : MonoBehaviour
         ScoreM.ScoreRefresh();
         StartText.gameObject.SetActive(false);
         PlayerM.Restart();
+        CheckTime = false;
     }
 
     void Finish()

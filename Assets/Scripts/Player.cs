@@ -186,4 +186,8 @@ public class Player : MonoBehaviour
         BoostCount = 0;
         AttackPattern = 1;
     }
+
+    public void ChangeAttack(){
+        AttackPattern = 3;
+    }
 }
