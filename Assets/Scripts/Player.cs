@@ -159,7 +159,7 @@ public class Player : MonoBehaviour
     }
 
     void Attack()
-    {
+    {//弾をAttackPatternの数だけ出す
         for (int i = 0; i < AttackPattern; i++)
         {
             GameObject FireObj = Instantiate(ShotObject) as GameObject;//弾の生成
@@ -181,13 +181,14 @@ public class Player : MonoBehaviour
     }
 
     public void Restart()
-    {
+    {//初期設定に戻す
         IsBoost = false;
         BoostCount = 0;
         AttackPattern = 1;
     }
 
     public void ChangeAttack(){
-        AttackPattern = 3;
+        AttackPattern = 3;//弾を3個同時に出すようにする
+        //今後、種類を増やしたくはある
     }
 }

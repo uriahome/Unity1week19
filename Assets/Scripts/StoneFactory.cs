@@ -32,7 +32,7 @@ public class StoneFactory : MonoBehaviour
         if (span < delta)
         {
             delta = 0;
-            MakeStone();
+            MakeStone();//隕石を1つ出す
         }
     }
 
@@ -49,17 +49,17 @@ public class StoneFactory : MonoBehaviour
         int r;//乱数
         r = Random.Range(0, 100);
         DirectionNum = r % Direction.Length;
-        StoneScript.directionX = Direction[DirectionNum];
+        StoneScript.directionX = Direction[DirectionNum];//x軸の力を決める
         int s ;//乱数
         int SpeedNum;
         s = Random.Range(0,100);
         SpeedNum = s%Speeds.Length;
-        StoneScript.speed = Speeds[SpeedNum];
+        StoneScript.speed = Speeds[SpeedNum];//隕石の速さを決める
 
     }
 
     void Move()
-    {
+    {//特定の地点を周回する
         DOTween.Sequence().Append(transform.DOLocalMove(new Vector3(7, 4.57f, 0), 1.0f))
         .Append(transform.DOLocalMove(new Vector3(0, 4.57f, 0), 1.0f))
         .Append(transform.DOLocalMove(new Vector3(-7, 4.57f, 0), 1.0f))
