@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -23,27 +24,34 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject IceWall;//子オブジェクトの壁
     [SerializeField] bool IsFire;//trueなら炎のモード、falseなら氷のモード
 
-    [SerializeField] int BoostCount;
+    [SerializeField] int BoostCount;//ブーストの残り回数を表す
     [SerializeField] bool IsBoost;//trueだと倍速で移動する
     [SerializeField] float BoostSpan;
     [SerializeField] float BoostDelta;
+    [SerializeField] GameObject BoostTextObj;
+    [SerializeField] Text BoostText;
 
     [SerializeField] int[] Direction = { 0, 25, -25 };//弾の発射角度
 
     [SerializeField] int AttackPattern;
 
     public float speed;//速度
+    
 
     void Start()
     {
         //this.rigid2d = GetComponent<Rigidbody2D>();
-        Debug.Log("nyaa");
+        //Debug.Log("nyaa");
         delta = 0;
         IsFire = true;
         IceWall = this.transform.GetChild(0).gameObject;
         IsBoost = false;
-        BoostCount = 0;
+        BoostCount = 3;
         AttackPattern = 1;
+
+        BoostTextObj = GameObject.Find("Canvas/BoostText");
+        BoostText = BoostTextObj.GetComponent<Text>();
+        BoostText.text = "Boost:" + BoostCount.ToString();//ブーストの残り回数を記述
     }
 
     // Update is called once per frame
@@ -83,13 +91,14 @@ public class Player : MonoBehaviour
 
 
         MoveVelocity = new Vector3(0.0f, 0.0f, 0.0f);
-        if (!IsBoost && BoostCount < 3)
+        if (!IsBoost && BoostCount > 0)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 IsBoost = true;
-                BoostCount++;
+                BoostCount--;
                 BoostDelta = 0;
+                BoostText.text = "Boost:" + BoostCount.ToString();//ブーストの残り回数を記述
             }
         }
         if (IsBoost)
@@ -183,7 +192,8 @@ public class Player : MonoBehaviour
     public void Restart()
     {//初期設定に戻す
         IsBoost = false;
-        BoostCount = 0;
+        BoostCount = 3;
+        BoostText.text = "Boost:" + BoostCount.ToString();//ブーストの残り回数を記述
         AttackPattern = 1;
     }
 
