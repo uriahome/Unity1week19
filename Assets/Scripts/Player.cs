@@ -201,4 +201,13 @@ public class Player : MonoBehaviour
         AttackPattern = 3;//弾を3個同時に出すようにする
         //今後、種類を増やしたくはある
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag =="Clock"){
+            GManager.instance.AddTime();
+            Destroy(collision.gameObject);
+        }
+    }
+
 }

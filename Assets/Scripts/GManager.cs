@@ -89,4 +89,8 @@ public class GManager : MonoBehaviour
         Debug.Log("終了");
         StartText.gameObject.SetActive(true);
     }
+
+    public void AddTime(){
+        CountTime +=5.0f;
+    }
 }
