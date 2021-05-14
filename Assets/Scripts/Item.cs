@@ -7,6 +7,8 @@ public class Item : MonoBehaviour
     [SerializeField] Rigidbody2D rb2d;
     [SerializeField] Vector2 direction;//移動する方向
     public float speed;
+
+    public int ItemNum;//アイテムとしての番号
     // Start is called before the first frame update
     void Start()
     {

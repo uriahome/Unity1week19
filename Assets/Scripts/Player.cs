@@ -202,10 +202,23 @@ public class Player : MonoBehaviour
         //今後、種類を増やしたくはある
     }
 
+    public void BoostCountUp(){
+        BoostCount++;
+        BoostText.text = "Boost:" + BoostCount.ToString();//ブーストの残り回数を記述
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag =="Clock"){
-            GManager.instance.AddTime();
+        if(collision.gameObject.tag =="Item"){
+            Item ItemScript = collision.gameObject.GetComponent<Item>();
+            switch(ItemScript.ItemNum){
+                case 0:
+                GManager.instance.AddTime();
+                break;
+                case 1:
+                BoostCountUp();
+                break;
+            }
             Destroy(collision.gameObject);
         }
     }
