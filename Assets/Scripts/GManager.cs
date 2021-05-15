@@ -90,7 +90,7 @@ public class GManager : MonoBehaviour
         StartText.gameObject.SetActive(true);
     }
 
-    public void AddTime(){
-        CountTime +=5.0f;
+    public void AddTime(){//制限時間を2秒追加
+        CountTime +=2.0f;
     }
 }
