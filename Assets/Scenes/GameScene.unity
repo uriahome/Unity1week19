@@ -737,6 +737,7 @@ MonoBehaviour:
   ScorePoint: 0
   audio: {fileID: 0}
   sound: {fileID: 8300000, guid: 0d3588e8b6ef080499872fa106be4c0c, type: 3}
+  RankingScore: 0a00000000000000000000000000000000000000
 --- !u!114 &448680407
 MonoBehaviour:
   m_ObjectHideFlags: 0

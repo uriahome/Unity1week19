@@ -10,6 +10,8 @@ public class Score : MonoBehaviour
     Text TargetText;
     public AudioSource audio;
     public AudioClip sound;
+
+    public int[] RankingScore;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,5 +74,27 @@ public class Score : MonoBehaviour
                 //トゥイーンの時間(秒)
                 1.0f
             );//通常版の文法を使用することで文章内の一部をトゥイーンさせることが可能
+    }
+
+    public void GameFinish()
+    {//スコアランキングの変動があるか判定
+        int i;
+        for (i = 0; i < RankingScore.Length; i++)
+        {
+            if(RankingScore[i] < ScorePoint){
+                ChangeRanking(i);
+                break;
+            }
+        }
+    }
+
+    void ChangeRanking(int num)
+    {//ランキングの更新を行う
+    //下の順位から更新していく
+        int j;
+        for(j=RankingScore.Length-1;j>num;j--){
+            RankingScore[j] = RankingScore[j-1];
+        }
+        RankingScore[num] = ScorePoint;
     }
 }

@@ -88,6 +88,7 @@ public class GManager : MonoBehaviour
         IsBattle = false;
         Debug.Log("終了");
         StartText.gameObject.SetActive(true);
+        ScoreM.GameFinish();//ランキングの処理
     }
 
     public void AddTime(){//制限時間を2秒追加
