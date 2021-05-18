@@ -29,6 +29,7 @@ public class Score : MonoBehaviour
             );//通常版の文法を使用することで文章内の一部をトゥイーンさせることが可能
 
         audio = GetComponent<AudioSource>();
+        RankingLoad();//ランキングの読み込み
     }
 
     // Update is called once per frame
@@ -96,5 +97,20 @@ public class Score : MonoBehaviour
             RankingScore[j] = RankingScore[j-1];
         }
         RankingScore[num] = ScorePoint;
+        RankingSave();//更新したランキングを保存する
+    }
+
+    void RankingSave(){//ランキングをPlayerPrefsに保存する
+        int k;
+        for(k=0;k<RankingScore.Length;k++){
+            PlayerPrefs.SetInt("Ranking_"+(k+1),RankingScore[k]);
+        }
+    }
+
+    void RankingLoad(){//ランキングをPlayerPrefsから読み込む
+        int l;
+        for(l=0;l<RankingScore.Length;l++){
+            RankingScore[l] = PlayerPrefs.GetInt("Ranking_"+(l+1),0);//保存されていなかったら0を読む
+        }
     }
 }
