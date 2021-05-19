@@ -12,6 +12,10 @@ public class Score : MonoBehaviour
     public AudioClip sound;
 
     public int[] RankingScore;
+
+    public GameObject RankingText;//ランキング表示の親オブジェクト
+    public Transform RankingTextTransform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +62,10 @@ public class Score : MonoBehaviour
         {
             return;//戦闘中以外は計算しない
         }
+        else
+        {
+            RankingText.gameObject.SetActive(false);
+        }
         audio.PlayOneShot(sound);//効果音を再生
         int StartScore = ScorePoint;
         ScorePoint += AddPoint;
@@ -79,38 +87,53 @@ public class Score : MonoBehaviour
 
     public void GameFinish()
     {//スコアランキングの変動があるか判定
+        RankingText.gameObject.SetActive(true);
         int i;
         for (i = 0; i < RankingScore.Length; i++)
         {
-            if(RankingScore[i] < ScorePoint){
+            if (RankingScore[i] < ScorePoint)
+            {
                 ChangeRanking(i);
                 break;
             }
+        }
+        i = 0;
+        foreach (Transform ChildTransform in RankingTextTransform)
+        {
+            Text ChildText;
+            ChildText = ChildTransform.GetComponent<Text>();
+            ChildText.text = "Rank" + (i + 1) + ":" + RankingScore[i].ToString();
+            i++;
         }
     }
 
     void ChangeRanking(int num)
     {//ランキングの更新を行う
-    //下の順位から更新していく
+     //下の順位から更新していく
         int j;
-        for(j=RankingScore.Length-1;j>num;j--){
-            RankingScore[j] = RankingScore[j-1];
+        for (j = RankingScore.Length - 1; j > num; j--)
+        {
+            RankingScore[j] = RankingScore[j - 1];
         }
         RankingScore[num] = ScorePoint;
         RankingSave();//更新したランキングを保存する
     }
 
-    void RankingSave(){//ランキングをPlayerPrefsに保存する
+    void RankingSave()
+    {//ランキングをPlayerPrefsに保存する
         int k;
-        for(k=0;k<RankingScore.Length;k++){
-            PlayerPrefs.SetInt("Ranking_"+(k+1),RankingScore[k]);
+        for (k = 0; k < RankingScore.Length; k++)
+        {
+            PlayerPrefs.SetInt("Ranking_" + (k + 1), RankingScore[k]);
         }
     }
 
-    void RankingLoad(){//ランキングをPlayerPrefsから読み込む
+    void RankingLoad()
+    {//ランキングをPlayerPrefsから読み込む
         int l;
-        for(l=0;l<RankingScore.Length;l++){
-            RankingScore[l] = PlayerPrefs.GetInt("Ranking_"+(l+1),0);//保存されていなかったら0を読む
+        for (l = 0; l < RankingScore.Length; l++)
+        {
+            RankingScore[l] = PlayerPrefs.GetInt("Ranking_" + (l + 1), 0);//保存されていなかったら0を読む
         }
     }
 }
