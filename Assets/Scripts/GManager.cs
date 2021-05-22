@@ -47,6 +47,10 @@ public class GManager : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.A)){
+            CountTime = 2;
+        }
+
         if (seconds >= 0)
         {
             CountTime -= Time.deltaTime;

@@ -105,7 +105,7 @@ public class Score : MonoBehaviour
             ChildText.text = "Rank" + (i + 1) + ":" + RankingScore[i].ToString();
             //縮小した状態から拡大するアニメーション
             ChildTransform.localScale = Vector3.one *0.2f;
-            ChildTransform.DOScale(1f,(1.0f-i*0.1f)).SetEase(Ease.OutBack,5f);
+            ChildTransform.DOScale(1f,(1.0f-i*0.1f)).SetEase(Ease.OutBack,5f);//.SetLoops(-1,LoopType.Restart);
             i++;
         }
     }
