@@ -39,7 +39,14 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (!GManager.instance.IsBattle)
+        {
+            return;//戦闘中以外は計算しない
+        }
+        else
+        {
+            RankingText.gameObject.SetActive(false);
+        }
     }
 
     public void ScoreRefresh()
@@ -102,10 +109,11 @@ public class Score : MonoBehaviour
         {
             Text ChildText;
             ChildText = ChildTransform.GetComponent<Text>();
-            ChildText.text = "Rank" + (i + 1) + ":" + RankingScore[i].ToString();
+            ChildText.DOText("Rank" + (i + 1) + ":" + RankingScore[i],(1.0f-i*0.1f)).SetOptions(true,ScrambleMode.Custom,"XYZ");
+            //ChildText.text = "Rank" + (i + 1) + ":" + RankingScore[i].ToString();
             //縮小した状態から拡大するアニメーション
-            ChildTransform.localScale = Vector3.one *0.2f;
-            ChildTransform.DOScale(1f,(1.0f-i*0.1f)).SetEase(Ease.OutBack,5f);//.SetLoops(-1,LoopType.Restart);
+            //ChildTransform.localScale = Vector3.one *0.2f;
+            //ChildTransform.DOScale(1f,(1.0f-i*0.1f)).SetEase(Ease.OutBack,5f);//.SetLoops(-1,LoopType.Restart);
             i++;
         }
     }
