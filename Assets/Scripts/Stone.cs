@@ -28,7 +28,8 @@ public class Stone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!GManager.instance.IsBattle){//戦闘中以外は削除
+        if (!GManager.instance.IsBattle)
+        {//戦闘中以外は削除
             Destroy(this.gameObject);
         }
     }
@@ -40,19 +41,20 @@ public class Stone : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (IsFire)
+        /*if (IsFire)
         {
             //Debug.Log(collision.gameObject.tag);
             if (collision.gameObject.tag == "IceWall")
             {
+                Debug.Log("反射!");
                 //上にあげる
                 directionY += 180.0f;
                 directionY = directionY % 360.0f;
                 Move();
             }
         }
-        else
-        {//同じ処理ではある。プレイヤーの玉か、燃えている隕石に当たると消える
+        else*/
+        //{//同じ処理ではある。プレイヤーの玉か、燃えている隕石に当たると消える
             if (collision.gameObject.tag == "Fire")
             {
                 ScoreM.ChangeScore(100);
@@ -63,17 +65,31 @@ public class Stone : MonoBehaviour
                 ScoreM.ChangeScore(100);
                 Destroy(this.gameObject);
             }
-        }
+        //}
 
         if (collision.gameObject.tag == "StoneWall")
         {//反射処理
             directionX += 180.0f;
             directionX = directionX % 360.0f;
             Move();
-        }else if(collision.gameObject.tag =="Earth"){//画面下の地球に当たるとスコアが減る
+        }
+        else if (collision.gameObject.tag == "Earth")
+        {//画面下の地球に当たるとスコアが減る
             Debug.Log("Earth Hit!!");
             ScoreM.ChangeScore(-50);
             Destroy(this.gameObject);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {//反射の処理はプレイヤーに反動がいかないようにTriggerで判定する
+        if (collision.gameObject.tag == "IceWall")
+        {
+            Debug.Log("反射!");
+            //上にあげる
+            directionY += 180.0f;
+            directionY = directionY % 360.0f;
+            Move();
         }
     }
 }

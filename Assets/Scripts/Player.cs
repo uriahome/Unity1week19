@@ -207,7 +207,7 @@ public class Player : MonoBehaviour
         BoostText.text = "Boost:" + BoostCount.ToString();//ブーストの残り回数を記述
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void  OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag =="Item"){
             Item ItemScript = collision.gameObject.GetComponent<Item>();
