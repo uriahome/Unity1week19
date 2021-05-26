@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;//DOTweenを使用するため
 
 public class GManager : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class GManager : MonoBehaviour
     [SerializeField] GameObject ScoreText;
     [SerializeField] Score ScoreM;
 
-    [SerializeField] GameObject StartText;
+    [SerializeField] GameObject StartTextObj;
+    [SerializeField] Text StartText;
     [SerializeField] GameObject PlayerObj;
     [SerializeField] Player PlayerM;
 
@@ -28,11 +30,13 @@ public class GManager : MonoBehaviour
         Timer = GameObject.Find("Canvas/TimeText");
         TimerText = Timer.GetComponent<Text>();
         ScoreText = GameObject.Find("Canvas/ScoreText");
-        StartText = GameObject.Find("Canvas/StartText");
+        StartTextObj = GameObject.Find("Canvas/StartText");
+        StartText = StartTextObj.GetComponent<Text>();
         ScoreM = ScoreText.GetComponent<Score>();
         PlayerObj = GameObject.Find("Player");
         PlayerM = PlayerObj.GetComponent<Player>();
         //IsBattle = true;
+        FadeTextUI();
 
     }
 
@@ -82,7 +86,7 @@ public class GManager : MonoBehaviour
         seconds = (int)CountTime;
         TimerText.text = "Time:" + seconds.ToString();
         ScoreM.ScoreRefresh();
-        StartText.gameObject.SetActive(false);
+        StartTextObj.gameObject.SetActive(false);
         PlayerM.Restart();
         CheckTime = false;
     }
@@ -91,11 +95,16 @@ public class GManager : MonoBehaviour
     {
         IsBattle = false;
         Debug.Log("終了");
-        StartText.gameObject.SetActive(true);
+        StartTextObj.gameObject.SetActive(true);
         ScoreM.GameFinish();//ランキングの処理
     }
 
     public void AddTime(){//制限時間を2秒追加
         CountTime +=2.0f;
+    }
+
+
+    void FadeTextUI(){
+        StartText.DOFade(0.1f, 1.0f).SetLoops(-1, LoopType.Yoyo);;
     }
 }
