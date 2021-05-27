@@ -105,6 +105,7 @@ public class GManager : MonoBehaviour
 
 
     void FadeTextUI(){
-        StartText.DOFade(0.1f, 1.0f).SetLoops(-1, LoopType.Yoyo);;
+        DOTween.Sequence().Append(StartText.DOFade(0.1f, 0.95f))
+        .Join(StartTextObj.transform.DOScale(1.2f,1.0f)).SetLoops(-1,LoopType.Restart);//拡大と透過を繰り返す
     }
 }
