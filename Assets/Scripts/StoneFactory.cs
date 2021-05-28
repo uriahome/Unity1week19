@@ -15,11 +15,11 @@ public class StoneFactory : MonoBehaviour
     //[SerialilzeField] Stone StoneScript;
     void Start()
     {
-        //delta = 0;
+        delta = 0;
         Move();
         Debug.Log(Speeds.Length);
         Debug.Log(Direction.Length);
-        InvokeRepeating("MakeStone",0.5f,1f);//0.5秒後に,MakeStoneを実行し、1秒置きに再実行し続ける
+        //InvokeRepeating("MakeStone",0.5f,1f);//0.5秒後に,MakeStoneを実行し、1秒置きに再実行し続ける
     }
 
     // Update is called once per frame
@@ -29,12 +29,12 @@ public class StoneFactory : MonoBehaviour
         {
             return;
         }
-        /*delta += Time.deltaTime;
+        delta += Time.deltaTime;
         if (span < delta)
         {
             delta = 0;
             MakeStone();//隕石を1つ出す
-        }*/
+        }
     }
 
     void MakeStone()
