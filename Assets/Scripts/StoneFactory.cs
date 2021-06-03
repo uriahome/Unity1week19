@@ -7,11 +7,13 @@ public class StoneFactory : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] GameObject[] ShotObject;//発射するオブジェクト
+    [SerializeField] float MaxTime;//弾の発射感覚の最大値
+    [SerializeField] float MinTime;//弾の発射感覚の最小値
     [SerializeField] float span;//弾がたまるまでの間隔
     [SerializeField] float delta;//溜めている時間
 
     [SerializeField] int[] Direction = { 0, 30, 45, 60, 90, 105, 120, 150, 180 };
-    [SerializeField] int[] Speeds = {2,3,5,8};
+    [SerializeField] int[] Speeds = { 2, 3, 5, 8 };
     //[SerialilzeField] Stone StoneScript;
     void Start()
     {
@@ -19,6 +21,7 @@ public class StoneFactory : MonoBehaviour
         Move();
         Debug.Log(Speeds.Length);
         Debug.Log(Direction.Length);
+        span = SetRandomSpan();//次の発射までの時間を決定する
         //InvokeRepeating("MakeStone",0.5f,1f);//0.5秒後に,MakeStoneを実行し、1秒置きに再実行し続ける
     }
 
@@ -34,7 +37,18 @@ public class StoneFactory : MonoBehaviour
         {
             delta = 0;
             MakeStone();//隕石を1つ出す
+            span = SetRandomSpan();//次の発射までの時間を決定する
         }
+    }
+
+    float SetRandomSpan()
+    {//弾の発生感覚を決める
+        float a,b;//一時的に使用する変数
+        a = Random.Range(MinTime, MaxTime);
+        b = Random.Range(MinTime, MaxTime);
+
+        //return Random.Range(MinTime, MaxTime);//そのまま返す場合はこっち
+        return (a+b)/2.0f;//正規分布に従って値を返す場合はこっち
     }
 
     void MakeStone()
@@ -51,10 +65,10 @@ public class StoneFactory : MonoBehaviour
         r = Random.Range(0, 100);
         DirectionNum = r % Direction.Length;
         StoneScript.directionX = Direction[DirectionNum];//x軸の力を決める
-        int s ;//乱数
+        int s;//乱数
         int SpeedNum;
-        s = Random.Range(0,100);
-        SpeedNum = s%Speeds.Length;
+        s = Random.Range(0, 100);
+        SpeedNum = s % Speeds.Length;
         StoneScript.speed = Speeds[SpeedNum];//隕石の速さを決める
 
     }

@@ -4018,6 +4018,7 @@ MonoBehaviour:
   CheckTime: 0
   ScoreText: {fileID: 0}
   ScoreM: {fileID: 0}
+  StartTextObj: {fileID: 0}
   StartText: {fileID: 0}
   PlayerObj: {fileID: 0}
   PlayerM: {fileID: 0}
@@ -4485,6 +4486,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StoneFactory
+      objectReference: {fileID: 0}
+    - target: {fileID: 7788870914512500418, guid: 99ac5208cc5fc514da9ddec9a66c6435,
+        type: 3}
+      propertyPath: MaxTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7788870914512500418, guid: 99ac5208cc5fc514da9ddec9a66c6435,
+        type: 3}
+      propertyPath: MinTime
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7788870914512500418, guid: 99ac5208cc5fc514da9ddec9a66c6435,
         type: 3}
