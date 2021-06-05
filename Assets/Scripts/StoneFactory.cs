@@ -75,9 +75,27 @@ public class StoneFactory : MonoBehaviour
 
     void Move()
     {//特定の地点を周回する
-        DOTween.Sequence().Append(transform.DOLocalMove(new Vector3(7, 4.57f, 0), 1.0f))
-        .Append(transform.DOLocalMove(new Vector3(0, 4.57f, 0), 1.0f))
-        .Append(transform.DOLocalMove(new Vector3(-7, 4.57f, 0), 1.0f))
-        .OnComplete(Move);
+       int SelectMove;
+        SelectMove = Random.Range(0, 100);
+        SelectMove %= 2;
+        switch (SelectMove)
+        {
+            case 0://広い範囲で周回する
+                DOTween.Sequence().Append(transform.DOLocalMove(new Vector3(-7, 4.57f, 0), 1.0f))
+                .Append(transform.DOLocalMove(new Vector3(0, 4.57f, 0), 1.0f))
+                .Append(transform.DOLocalMove(new Vector3(7, 4.57f, 0), 1.0f))
+                .OnComplete(Move);
+                break;
+            case 1://狭い範囲で周回する
+               DOTween.Sequence().Append(transform.DOLocalMove(new Vector3(-3, 4.57f, 0), 1.0f))
+                .Append(transform.DOLocalMove(new Vector3(0, 4.57f, 0), 1.0f))
+                .Append(transform.DOLocalMove(new Vector3(3, 4.57f, 0), 1.0f))
+                .OnComplete(Move);
+                break;
+
+            default:
+            break;
+
+        }
     }
 }
